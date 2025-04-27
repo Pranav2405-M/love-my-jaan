@@ -23,9 +23,27 @@
     .photo:hover {
       transform: scale(1.05);
     }
-    h1 {
-      color: #d81b60;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    .message {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      display: none;
+      box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+      text-align: left;
+      line-height: 1.6;
+    }
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      color: #ff69b4;
+      pointer-events: none;
+      animation: float 5s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-500px) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
@@ -33,14 +51,55 @@
   <h1>For My Beautiful Jaan ❤️</h1>
   <p style="color:#f06292; font-weight:bold;">21st April - 1 Year & 3 Months Together</p>
 
-  <!-- PASTE YOUR IMAGE LINK HERE -->
   <img src="https://i.ibb.co/N2Sry6yY/couple-png.jpg" 
        alt="Pranav & Nivedita" 
        class="photo"
-       onclick="alert('I love you meri jaan! ❤️')">
+       id="couplePhoto">
 
-  <p style="margin-top:40px; color:#ff1493;">
-    Made with Love by Pranav for Nivedita
-  </p>
+  <div class="message" id="loveMessage">
+    <p>I love you meri jaan, today is 21st April which means almost 1 year 3 months.. I can't believe that we have crossed this mark together.. being with you through all of this reminds me how grateful I am..</p>
+    
+    <p>Ever since I have been with you I have realized the value of love.. You are the best thing that has ever happened to me ever..</p>
+    
+    <p>I have made mistakes, hurt you a lot, and I know it, I was so stupid for doing so, but I am improving on myself..</p>
+    
+    <p>I love you meri jaan bahot zyadaaa.. I am going to give you a glimpse of this website that I made on Sunday and then I'll show it to you once you get into college when I give you your college goodies..</p>
+    
+    <p>I love you bahot bahot zyada meri jaan.. You are the bestttt.. ❤️❤️</p>
+  </div>
+
+  <script>
+    // Show message + hearts when photo is clicked
+    document.getElementById('couplePhoto').addEventListener('click', function() {
+      const message = document.getElementById('loveMessage');
+      message.style.display = message.style.display === 'block' ? 'none' : 'block';
+      
+      // Create 30 floating hearts
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    });
+
+    // Create floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.innerHTML = '❤️';
+      heart.classList.add('heart');
+      
+      // Random position
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
+      
+      // Random animation
+      heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+      
+      document.body.appendChild(heart);
+      
+      // Remove heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
